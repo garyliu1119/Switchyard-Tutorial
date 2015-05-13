@@ -1,0 +1,15 @@
+<?xml version="1.0" encoding="UTF-8"?>
+<sy:switchyard xmlns:bean="urn:switchyard-component-bean:config:1.1" xmlns:sca="http://docs.oasis-open.org/ns/opencsa/sca/200912" xmlns:sy="urn:switchyard-config:switchyard:1.1" name="switchyard-helloworld-demo" targetNamespace="urn:com.ggl.switchyard:switchyard-helloworld-demo:1.0">
+  <sca:composite name="switchyard-helloworld-demo" targetNamespace="urn:com.ggl.switchyard:switchyard-helloworld-demo:1.0">
+    <sca:component name="HelloWorldServiceBean">
+      <bean:implementation.bean class="com.ggl.switchyard.switchyard_helloworld_demo.HelloWorldServiceBean"/>
+      <sca:service name="HelloWorldService">
+        <sca:interface.java interface="com.ggl.switchyard.switchyard_helloworld_demo.HelloWorldService"/>
+      </sca:service>
+    </sca:component>
+    <sca:service name="HelloWorldService" promote="HelloWorldServiceBean/HelloWorldService">
+      <sca:interface.java interface="com.ggl.switchyard.switchyard_helloworld_demo.HelloWorldService"/>
+      <sca:binding.sca name="HelloServiceScaBinging"/>
+    </sca:service>
+  </sca:composite>
+</sy:switchyard>

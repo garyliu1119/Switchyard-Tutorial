@@ -1,0 +1,18 @@
+<?xml version="1.0" encoding="UTF-8"?>
+<sy:switchyard xmlns:bean="urn:switchyard-component-bean:config:1.1" xmlns:resteasy="urn:switchyard-component-resteasy:config:1.1" xmlns:sca="http://docs.oasis-open.org/ns/opencsa/sca/200912" xmlns:sy="urn:switchyard-config:switchyard:1.1" name="switchyard-rest-demo-one" targetNamespace="urn:com.ggl.switchyard.demo:switchyard-rest-demo-one:1.0">
+  <sca:composite name="switchyard-rest-demo-one" targetNamespace="urn:com.ggl.switchyard.demo:switchyard-rest-demo-one:1.0">
+    <sca:component name="OrderServiceImpl">
+      <bean:implementation.bean class="com.ggl.switchyard.demo.switchyard_rest_demo_one.OrderServiceImpl"/>
+      <sca:service name="OrderService">
+        <sca:interface.java interface="com.ggl.switchyard.demo.switchyard_rest_demo_one.OrderService"/>
+      </sca:service>
+    </sca:component>
+    <sca:service name="OrderService" promote="OrderServiceImpl/OrderService">
+      <sca:interface.java interface="com.ggl.switchyard.demo.switchyard_rest_demo_one.OrderService"/>
+      <resteasy:binding.rest name="OrderBinding">
+        <resteasy:interfaces>com.ggl.switchyard.demo.switchyard_rest_demo_one.OrderResource</resteasy:interfaces>
+        <resteasy:contextPath>GGL</resteasy:contextPath>
+      </resteasy:binding.rest>
+    </sca:service>
+  </sca:composite>
+</sy:switchyard>
