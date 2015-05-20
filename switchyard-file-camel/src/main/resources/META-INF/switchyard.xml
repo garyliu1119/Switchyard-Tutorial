@@ -1,0 +1,31 @@
+<?xml version="1.0" encoding="UTF-8"?>
+<sy:switchyard xmlns:camel="urn:switchyard-component-camel:config:1.1" xmlns:file="urn:switchyard-component-camel-file:config:1.1" xmlns:sca="http://docs.oasis-open.org/ns/opencsa/sca/200912" xmlns:sy="urn:switchyard-config:switchyard:1.1" name="switchyard-file-camel" targetNamespace="urn:com.example.switchyard:switchyard-file-camel:1.0">
+  <sca:composite name="switchyard-file-camel" targetNamespace="urn:com.example.switchyard:switchyard-file-camel:1.0">
+    <sca:component name="CamelServiceRoute">
+      <camel:implementation.camel>
+        <camel:java class="com.example.switchyard.switchyard_file_camel.CamelServiceRoute"/>
+      </camel:implementation.camel>
+      <sca:service name="FileRetrievalService">
+        <sca:interface.java interface="com.example.switchyard.switchyard_file_camel.FileRetrievalService"/>
+      </sca:service>
+      <sca:reference name="XMLService">
+        <sy:interface.esb inputType="java:java.lang.String"/>
+      </sca:reference>
+    </sca:component>
+    <sca:service name="FileRetrievalService" promote="CamelServiceRoute/FileRetrievalService">
+      <sca:interface.java interface="com.example.switchyard.switchyard_file_camel.FileRetrievalService"/>
+      <file:binding.file name="FileBinding">
+        <file:directory>/Users/Gary2013/jFSW/input</file:directory>
+        <file:consume/>
+      </file:binding.file>
+    </sca:service>
+    <sca:component name="Route">
+      <camel:implementation.camel>
+        <camel:xml path="META-INF/route.xml"/>
+      </camel:implementation.camel>
+      <sca:service name="XMLService">
+        <sy:interface.esb inputType="java:java.lang.String"/>
+      </sca:service>
+    </sca:component>
+  </sca:composite>
+</sy:switchyard>
