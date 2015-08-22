@@ -16,6 +16,7 @@ public final class PersonLocatorTransformer {
 
 	@Transformer(to = "{urn:com.ggl.switchyard:switchyard-soap-binding-demo:1.0}findByLastNameResponse")
 	public Element transformListToFindByLastNameResponse(List from) {
+		
 		List<Person> result = (List<Person>) from;
 		StringBuffer bodyXml = new StringBuffer();
 		for (Person p : result) {
